@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService {
             throw new AccountOrPasswordErrorException("账号或者密码有误!");
         }
 
-
-        return null;
+        return user;
     }
 }

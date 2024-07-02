@@ -1,11 +1,16 @@
 package edu.cxy.svspcxy.controller;
 
+import edu.cxy.svspcxy.entity.User;
+import edu.cxy.svspcxy.request.ResponseResult;
 import edu.cxy.svspcxy.service.UserService;
+import edu.cxy.svspcxy.util.JWTUtil;
 import edu.cxy.svspcxy.vo.UserLoginVo;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 用户接口：登录、注册、修改头像、密码等
@@ -24,11 +29,17 @@ public class UserController {
     // @RequestBody：将字符串转换成对象，然后再赋值给形参
     @PostMapping("/login")
     //@ResponseBody  // 返回的json数据不是页面
-    public String login(@RequestBody UserLoginVo vo){
+    public ResponseResult<User> login(@RequestBody UserLoginVo vo, HttpServletResponse response){
         System.out.println(vo);
 
-        userService.login(vo);
+        User user = userService.login(vo);
 
-        return "person.html";
+        // 颁发令牌：携带用户信息加密字符串
+        String token = JWTUtil.generateToken(user.getId(), user.getAccount());
+        // 通过响应头的方式将token返回给浏览器
+        response.setHeader("Authorization", token);
+
+
+        return new ResponseResult<>(HttpStatus.OK.value(), "登录成功", user);
     }
 }
