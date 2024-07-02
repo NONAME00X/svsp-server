@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.cxy.svspcxy.mapper.UserMapper">
+    <select id="findByAccount" resultType="edu.cxy.svspcxy.entity.User">
+        select * from t_user where account = #{account}
+    </select>
+</mapper>
