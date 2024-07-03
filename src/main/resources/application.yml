@@ -15,3 +15,12 @@ logging:
   level:
     #root: debug  # 将整个项目的日记级别都调整为debug，显示、记录所有的日志信息，包括debug、info
     edu.cxy.svspcxy: debug  # 指定某个包下的日志级别为debug，其它默认为info
+alibaba:
+  cloud:
+    access-key: LTAI5tEwpduUYTmAj6Kg5Qhj   # 自己的key
+    secret-key: 9r4KWGNM8yCzxhiG6y3EjwjaOeqyfv  # 自己的秘钥
+    oss:
+      endpoint: oss-cn-chengdu.aliyuncs.com  # oss存储地址
+      bucketName: cdjava96  # 桶名
+    region: cn-shanghai  # 接入区域
+    endpoint: green-cip.cn-shanghai.aliyuncs.com  # 接入地址

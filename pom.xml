@@ -53,6 +53,31 @@
             <version>1.4.3</version>
         </dependency>
 
+        <!--aliyun oss 上传文件-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>aliyun-oss-spring-boot-starter</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.5.0</version>
+        </dependency>
+
+        <!-- 审查视频、图片内容 -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>green20220302</artifactId>
+            <version>2.2.7</version>
+        </dependency>
+        <!-- 对象与json转换工具 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>2.0.6</version>
+        </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>

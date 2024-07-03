@@ -5,6 +5,7 @@ import edu.cxy.svspcxy.request.ResPage;
 import edu.cxy.svspcxy.request.ResponseResult;
 import edu.cxy.svspcxy.service.VideoService;
 import edu.cxy.svspcxy.util.JWTUtil;
+import edu.cxy.svspcxy.util.OssUtil;
 import edu.cxy.svspcxy.vo.VideoAddVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,6 +26,9 @@ import java.util.List;
 public class VideoController {
     @Resource
     private VideoService videoService;
+
+    @Resource
+    private OssUtil ossUtil;
 
     @GetMapping("/findByUid/{aaa}/{bbb}")
     public ResponseResult findByUid(
@@ -43,9 +48,12 @@ public class VideoController {
     }
 
     @PostMapping("/add")
-    public ResponseResult add(VideoAddVo vo){
+    public ResponseResult add(VideoAddVo vo) throws IOException {
 
         log.debug(vo.toString());
+        // 上传文件
+        ossUtil.upOss(vo.getCover());
+
         return null;
     }
 }
