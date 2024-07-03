@@ -6,3 +6,7 @@ spring:
     password: root1234
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+logging:
+  level:
+    #root: debug  # 将整个项目的日记级别都调整为debug，显示、记录所有的日志信息，包括debug、info
+    edu.cxy.svspcxy: info  # 指定某个包下的日志级别为debug，其它默认为info
