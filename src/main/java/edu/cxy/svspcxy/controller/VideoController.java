@@ -48,11 +48,26 @@ public class VideoController {
     }
 
     @PostMapping("/add")
-    public ResponseResult add(VideoAddVo vo) throws IOException {
+    public ResponseResult add(VideoAddVo vo, HttpServletRequest request) throws IOException {
 
         log.debug(vo.toString());
         // 上传文件
-        ossUtil.upOss(vo.getCover());
+        // 返回文件URL：返回的就是文件网络URL
+        String coverUrl = ossUtil.upOss(vo.getCover());
+        String videoUrl = ossUtil.upOss(vo.getVideo());
+
+        // 将视频信息写入数据库
+        int uid = JWTUtil.getuid(request.getHeader("Authorization"));
+        // 将数据封装
+        Video video = new Video();
+        video.setUid(uid);
+        video.setVideo(videoUrl);
+        video.setCover(coverUrl);
+        video.setTitle(vo.getTitle());   // 标题标题如果包含敏感信息应该处理
+        video.setCids(vo.getCids());
+
+        videoService.addVideo(video);
+
 
         return null;
     }

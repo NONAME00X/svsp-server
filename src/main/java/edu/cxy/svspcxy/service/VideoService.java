@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface VideoService {
     ResPage<List<Video>> findByUid(Integer uid, Integer page, Integer size);
+
+    boolean addVideo(Video video);
 }

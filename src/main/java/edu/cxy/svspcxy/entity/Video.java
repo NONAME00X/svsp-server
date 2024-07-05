@@ -17,4 +17,6 @@ public class Video {
     private Integer playnums;   // 播放次数
     private String reason;      // 是否通过的信息
     private String state;   // 视频状态
+
+    private Integer[] cids; // 分类id
 }

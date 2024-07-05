@@ -6,4 +6,8 @@
     <select id="findByUid" resultType="edu.cxy.svspcxy.entity.Video">
         select * from t_video where uid = #{uid}
     </select>
+
+    <insert id="addVideo">
+        insert into t_video values(null, #{uid}, #{title}, #{video}, #{cover}, now(), 0, null, null, 'video_commit')
+    </insert>
 </mapper>

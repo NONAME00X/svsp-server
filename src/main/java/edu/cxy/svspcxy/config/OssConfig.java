@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 public class OssConfig {
+    // @Value可以用来获取配置文件中的配置信息
     @Value("${alibaba.cloud.access-key}")
     private String accessKey;
     @Value("${alibaba.cloud.secret-key}")

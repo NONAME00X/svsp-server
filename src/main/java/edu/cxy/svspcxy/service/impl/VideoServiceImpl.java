@@ -8,6 +8,7 @@ import edu.cxy.svspcxy.request.ResPage;
 import edu.cxy.svspcxy.service.VideoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -42,5 +43,13 @@ public class VideoServiceImpl implements VideoService {
 
         // 返回数据
         return resPage;
+    }
+
+    @Transactional  // 给当前方法添加事务管理的功能
+    @Override
+    public boolean addVideo(Video video) {
+        videoMapper.addVideo(video);
+
+        return false;
     }
 }
