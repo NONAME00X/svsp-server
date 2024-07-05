@@ -15,7 +15,7 @@ public interface VideoMapper {
     boolean addVideoCategory(Video video);
 
     // 将参数封装成了一个map进行传参
-    void addTaskId(@Param("url") String url,@Param("taskId") String taskId);
+    void addTaskId(@Param("id") Integer id,@Param("taskId") String taskId);
 
     List<Video> findByStateCommit();
 

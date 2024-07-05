@@ -59,9 +59,9 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public void addTaskId(String url, String taskId) {
+    public void addTaskId(Integer id, String taskId) {
         // 通过视频的URL设置任务id
-        videoMapper.addTaskId(url, taskId);
+        videoMapper.addTaskId(id, taskId);
     }
 
     @Override

@@ -68,7 +68,7 @@ public class VideoController {
         videoService.addVideo(video);
 
         // 审核视频内容
-        ossUtil.check(videoUrl);
+        ossUtil.check(videoUrl, video.getId());
 
         return null;
     }

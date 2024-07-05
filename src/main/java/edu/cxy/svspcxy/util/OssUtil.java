@@ -61,9 +61,11 @@ public class OssUtil {
     }
     // 审核视频任务类
     private class CheckVideoRunnable implements Runnable{
-        private String url;
-        public CheckVideoRunnable(String url) {
+        private String url; // 视频URL
+        private Integer id; // 视频id
+        public CheckVideoRunnable(String url, Integer id) {
             this.url = url;
+            this.id = id;
         }
 
         @Override
@@ -86,7 +88,7 @@ public class OssUtil {
                     if (200 == code) {
                         VideoModerationResponseBody.VideoModerationResponseBodyData data = result.getData();
                         // 将任务id写入数据库
-                        videoService.addTaskId(url, data.getTaskId());
+                        videoService.addTaskId(id, data.getTaskId());
                         
                         log.info("taskId = [" + data.getTaskId() + "]");
                     } else {
@@ -103,10 +105,12 @@ public class OssUtil {
 
     /**
      * 检查视频
-     * @param url  视频地址
+     *
+     * @param url 视频地址
+     * @param id  视频id
      */
-    public void check(String url){
-        EXECUTORSERVICE.execute(new CheckVideoRunnable(url));
+    public void check(String url, Integer id){
+        EXECUTORSERVICE.execute(new CheckVideoRunnable(url, id));
     }
 
     /**

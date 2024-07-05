@@ -10,7 +10,7 @@ public interface VideoService {
 
     boolean addVideo(Video video);
 
-    void addTaskId(String url, String taskId);
+    void addTaskId(Integer id, String taskId);
 
     List<Video> findByStateCommit();
 

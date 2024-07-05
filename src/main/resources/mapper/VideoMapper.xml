@@ -25,7 +25,7 @@
     </insert>
 
     <update id="addTaskId">
-        update t_video set taskid = #{taskId} where video = #{url}
+        update t_video set taskid = #{taskId} where id = #{id}
     </update>
 
     <select id="findByStateCommit" resultType="edu.cxy.svspcxy.entity.Video">
