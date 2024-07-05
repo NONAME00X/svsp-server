@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.cxy.svspcxy.mapper.VideoMapper">
     <select id="findByUid" resultType="edu.cxy.svspcxy.entity.Video">
-        select * from t_video where uid = #{uid}
+        select * from t_video where uid = #{uid} order by id desc
     </select>
 
     <!--useGeneratedKeys：是否要用户当前这条数据的id-->

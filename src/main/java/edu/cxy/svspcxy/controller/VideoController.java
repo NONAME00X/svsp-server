@@ -70,6 +70,6 @@ public class VideoController {
         // 审核视频内容
         ossUtil.check(videoUrl, video.getId());
 
-        return null;
+        return new ResponseResult(HttpStatus.OK.value(),"success", true);
     }
 }
