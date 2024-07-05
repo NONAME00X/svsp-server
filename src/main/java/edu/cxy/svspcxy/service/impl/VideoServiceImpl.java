@@ -48,7 +48,14 @@ public class VideoServiceImpl implements VideoService {
     @Transactional  // 给当前方法添加事务管理的功能
     @Override
     public boolean addVideo(Video video) {
+        log.debug("video.id = {}", video.getId());
+        // 插入视频信息
         videoMapper.addVideo(video);
+
+        // 插入视频分类信息：需要刚才插入的视频的id
+        log.debug("video.id = {}", video.getId());
+
+        videoMapper.addVideoCategory(video);
 
         return false;
     }

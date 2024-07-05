@@ -10,4 +10,6 @@ public interface VideoMapper {
     List<Video> findByUid(Integer uid);
 
     boolean addVideo(Video video);
+
+    boolean addVideoCategory(Video video);
 }

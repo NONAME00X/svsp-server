@@ -7,7 +7,20 @@
         select * from t_video where uid = #{uid}
     </select>
 
-    <insert id="addVideo">
+    <!--useGeneratedKeys：是否要用户当前这条数据的id-->
+    <!--keyProperty：用形参的哪个属性来接收id的值-->
+    <insert id="addVideo" useGeneratedKeys="true" keyProperty="id">
         insert into t_video values(null, #{uid}, #{title}, #{video}, #{cover}, now(), 0, null, null, 'video_commit')
+    </insert>
+
+    <!--id: 10    cids:[1,2,3]
+        forEach
+        for(int cid : cids)
+    -->
+    <insert id="addVideoCategory">
+        insert into t_video_category values
+        <foreach collection="cids" item="cid" separator=",">
+            (#{id}, #{cid})
+        </foreach>
     </insert>
 </mapper>
