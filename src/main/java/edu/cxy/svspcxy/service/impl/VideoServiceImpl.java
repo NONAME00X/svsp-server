@@ -63,4 +63,14 @@ public class VideoServiceImpl implements VideoService {
         // 通过视频的URL设置任务id
         videoMapper.addTaskId(url, taskId);
     }
+
+    @Override
+    public List<Video> findByStateCommit() {
+        return videoMapper.findByStateCommit();
+    }
+
+    @Override
+    public void updateState(Video video) {
+        videoMapper.updateState(video);
+    }
 }

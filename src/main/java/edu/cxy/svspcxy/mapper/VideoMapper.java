@@ -16,4 +16,8 @@ public interface VideoMapper {
 
     // 将参数封装成了一个map进行传参
     void addTaskId(@Param("url") String url,@Param("taskId") String taskId);
+
+    List<Video> findByStateCommit();
+
+    void updateState(Video video);
 }

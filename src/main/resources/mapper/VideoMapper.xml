@@ -28,4 +28,11 @@
         update t_video set taskid = #{taskId} where video = #{url}
     </update>
 
+    <select id="findByStateCommit" resultType="edu.cxy.svspcxy.entity.Video">
+        select * from t_video where state = 'video_commit'
+    </select>
+
+    <update id="updateState">
+        update t_video set reason = #{reason},state = 'video_pass' where id = #{id}
+    </update>
 </mapper>
