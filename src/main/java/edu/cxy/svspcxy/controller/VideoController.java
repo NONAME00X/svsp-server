@@ -65,9 +65,10 @@ public class VideoController {
         video.setCover(coverUrl);
         video.setTitle(vo.getTitle());   // 标题标题如果包含敏感信息应该处理
         video.setCids(vo.getCids());
-
         videoService.addVideo(video);
 
+        // 审核视频内容
+        ossUtil.check(videoUrl);
 
         return null;
     }
