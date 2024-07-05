@@ -51,12 +51,16 @@ public class VideoServiceImpl implements VideoService {
         log.debug("video.id = {}", video.getId());
         // 插入视频信息
         videoMapper.addVideo(video);
-
         // 插入视频分类信息：需要刚才插入的视频的id
         log.debug("video.id = {}", video.getId());
-
         videoMapper.addVideoCategory(video);
 
-        return false;
+        return true;
+    }
+
+    @Override
+    public void addTaskId(String url, String taskId) {
+        // 通过视频的URL设置任务id
+        videoMapper.addTaskId(url, taskId);
     }
 }

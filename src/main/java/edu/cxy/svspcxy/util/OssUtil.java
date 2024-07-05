@@ -86,7 +86,7 @@ public class OssUtil {
                     if (200 == code) {
                         VideoModerationResponseBody.VideoModerationResponseBodyData data = result.getData();
                         // 将任务id写入数据库
-                        // videoService.addTaskId(url, data.getTaskId());
+                        videoService.addTaskId(url, data.getTaskId());
                         
                         log.info("taskId = [" + data.getTaskId() + "]");
                     } else {

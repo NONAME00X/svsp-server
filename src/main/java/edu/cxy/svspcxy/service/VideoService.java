@@ -9,4 +9,6 @@ public interface VideoService {
     ResPage<List<Video>> findByUid(Integer uid, Integer page, Integer size);
 
     boolean addVideo(Video video);
+
+    void addTaskId(String url, String taskId);
 }

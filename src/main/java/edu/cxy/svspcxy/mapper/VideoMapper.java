@@ -2,6 +2,7 @@ package edu.cxy.svspcxy.mapper;
 
 import edu.cxy.svspcxy.entity.Video;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,4 +13,7 @@ public interface VideoMapper {
     boolean addVideo(Video video);
 
     boolean addVideoCategory(Video video);
+
+    // 将参数封装成了一个map进行传参
+    void addTaskId(@Param("url") String url,@Param("taskId") String taskId);
 }

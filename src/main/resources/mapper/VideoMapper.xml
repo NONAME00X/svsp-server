@@ -23,4 +23,9 @@
             (#{id}, #{cid})
         </foreach>
     </insert>
+
+    <update id="addTaskId">
+        update t_video set taskid = #{taskId} where video = #{url}
+    </update>
+
 </mapper>
