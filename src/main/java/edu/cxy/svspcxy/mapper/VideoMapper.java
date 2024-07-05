@@ -20,4 +20,6 @@ public interface VideoMapper {
     List<Video> findByStateCommit();
 
     void updateState(Video video);
+
+    List<Video> findNew();
 }

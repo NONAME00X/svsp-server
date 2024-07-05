@@ -73,4 +73,9 @@ public class VideoServiceImpl implements VideoService {
     public void updateState(Video video) {
         videoMapper.updateState(video);
     }
+
+    @Override
+    public List<Video> findNew() {
+        return videoMapper.findNew();
+    }
 }

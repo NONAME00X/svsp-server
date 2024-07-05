@@ -72,4 +72,10 @@ public class VideoController {
 
         return new ResponseResult(HttpStatus.OK.value(),"success", true);
     }
+
+    @GetMapping("/findNew")
+    public ResponseResult findNew(){
+        List<Video> videoList = videoService.findNew();
+        return new ResponseResult(HttpStatus.OK.value(),"success", videoList);
+    }
 }

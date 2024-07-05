@@ -15,4 +15,7 @@ public interface VideoService {
     List<Video> findByStateCommit();
 
     void updateState(Video video);
+
+    List<Video> findNew();
+
 }
