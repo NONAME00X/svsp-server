@@ -6,4 +6,10 @@
     <insert id="add">
         insert into t_review values(null, #{vid}, #{uid}, #{content}, now(), 'review_commit')
     </insert>
+
+    <select id="findByVid" resultType="edu.cxy.svspcxy.entity.Review">
+        SELECT u.account,u.avatar,r.id,r.vid,r.uid,r.content,r.time
+        FROM t_user u,t_review r
+        WHERE u.id = r.uid AND r.vid = #{vid} AND r.state = 'review_pass'
+    </select>
 </mapper>

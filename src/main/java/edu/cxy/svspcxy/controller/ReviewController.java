@@ -1,5 +1,6 @@
 package edu.cxy.svspcxy.controller;
 
+import edu.cxy.svspcxy.entity.Review;
 import edu.cxy.svspcxy.request.ResponseResult;
 import edu.cxy.svspcxy.service.ReviewService;
 import edu.cxy.svspcxy.util.JWTUtil;
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * @author: Mr·Xiang
@@ -41,5 +43,11 @@ public class ReviewController {
         vo.setUid(uid);
 
         return new ResponseResult(HttpStatus.OK.value(), "success", reviewService.add(vo));
+    }
+
+    @GetMapping("/findByVid/{vid}")
+    public ResponseResult findByVid(@PathVariable("vid") Integer vid){
+        List<Review> reviewList = reviewService.findByVid(vid);
+        return new ResponseResult(HttpStatus.OK.value(), "success", reviewList);
     }
 }
