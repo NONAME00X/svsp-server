@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.cxy.svspcxy.mapper.LikeMapper">
+    <insert id="addLike">
+        insert into t_video_like values (null, #{vid}, #{uid}, now())
+    </insert>
+
+    <delete id="delLike">
+        delete from t_video_like where uid = #{uid} and vid = #{vid}
+    </delete>
+</mapper>
