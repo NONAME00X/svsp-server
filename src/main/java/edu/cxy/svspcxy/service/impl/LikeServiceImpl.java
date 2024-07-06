@@ -28,4 +28,9 @@ public class LikeServiceImpl implements LikeService {
         }
         return true;
     }
+
+    @Override
+    public boolean findByVid(Integer vid, int uid) {
+        return likeMapper.findByVid(uid, vid);
+    }
 }

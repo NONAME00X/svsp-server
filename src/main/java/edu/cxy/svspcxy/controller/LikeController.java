@@ -33,4 +33,12 @@ public class LikeController {
                 HttpStatus.OK.value(),
                 "success", likeService.update(isUp, uid, vid));
     }
+
+    @GetMapping("/findByVid/{vid}")
+    public ResponseResult findByVid(@PathVariable("vid") Integer vid,HttpServletRequest request){
+        int uid = JWTUtil.getuid(request.getHeader("Authorization"));
+
+        return new ResponseResult(
+                HttpStatus.OK.value(), "success", likeService.findByVid(vid, uid));
+    }
 }
