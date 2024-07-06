@@ -22,4 +22,7 @@ public interface VideoMapper {
     void updateState(Video video);
 
     List<Video> findNew();
+
+    Video findById(Integer id);
+
 }

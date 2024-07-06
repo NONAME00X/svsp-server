@@ -78,4 +78,9 @@ public class VideoServiceImpl implements VideoService {
     public List<Video> findNew() {
         return videoMapper.findNew();
     }
+
+    @Override
+    public Video findById(Integer id) {
+        return videoMapper.findById(id);
+    }
 }

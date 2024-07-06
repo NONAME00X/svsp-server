@@ -39,4 +39,8 @@
     <select id="findNew" resultType="edu.cxy.svspcxy.entity.Video">
         select * from t_video where state = 'video_pass' order by id desc limit 6
     </select>
+
+    <select id="findById" resultType="edu.cxy.svspcxy.entity.Video">
+        select * from t_video where id = #{id} and state = 'video_pass'
+    </select>
 </mapper>

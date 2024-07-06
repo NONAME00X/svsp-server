@@ -78,4 +78,11 @@ public class VideoController {
         List<Video> videoList = videoService.findNew();
         return new ResponseResult(HttpStatus.OK.value(),"success", videoList);
     }
+
+    @GetMapping("/findById/{id}")
+    public ResponseResult findById(@PathVariable("id") Integer id){
+        Video video  = videoService.findById(id);
+
+        return new ResponseResult(HttpStatus.OK.value(),"success",video);
+    }
 }

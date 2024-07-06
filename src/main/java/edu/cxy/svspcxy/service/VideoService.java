@@ -18,4 +18,5 @@ public interface VideoService {
 
     List<Video> findNew();
 
+    Video findById(Integer id);
 }
