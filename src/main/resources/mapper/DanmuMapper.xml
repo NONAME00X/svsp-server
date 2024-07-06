@@ -6,4 +6,8 @@
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
         insert into t_danmu values(NULL,#{vid},#{uid},#{duration},#{start},#{txt},#{mode},#{color})
     </insert>
+
+    <select id="findByVid" resultType="edu.cxy.svspcxy.entity.Danmu">
+        select * from t_danmu where vid = #{vid}
+    </select>
 </mapper>

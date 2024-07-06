@@ -8,6 +8,7 @@ import edu.cxy.svspcxy.service.DanmuService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author: Mr·Xiang
@@ -35,5 +36,10 @@ public class DanmuServiceImpl implements DanmuService {
 
         // 返回结果
         return danmu;
+    }
+
+    @Override
+    public List<Danmu> findByVid(Integer vid) {
+        return danmuMapper.findByVid(vid);
     }
 }
