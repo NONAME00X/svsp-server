@@ -101,4 +101,10 @@ public class VideoController {
         ResPage<List<Video>> resPage = videoService.findAll(page, size);
         return new ResponseResult(HttpStatus.OK.value(), "success", resPage);
     }
+
+    @GetMapping("/lock/{id}")
+    public ResponseResult lock(@PathVariable("id") Integer id){
+
+        return new ResponseResult(HttpStatus.OK.value(), "success", videoService.lock(id));
+    }
 }

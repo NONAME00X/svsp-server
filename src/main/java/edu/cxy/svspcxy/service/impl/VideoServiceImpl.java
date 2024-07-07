@@ -108,4 +108,10 @@ public class VideoServiceImpl implements VideoService {
         //
         return resPage;
     }
+
+    @Transactional
+    @Override
+    public boolean lock(Integer id) {
+        return videoMapper.lock(id);
+    }
 }

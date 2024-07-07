@@ -51,4 +51,8 @@
     <select id="findAll" resultType="edu.cxy.svspcxy.entity.Video">
         select * from t_video order by id desc
     </select>
+
+    <update id="lock">
+        update t_video set state = 'video_lock' where id = #{id}
+    </update>
 </mapper>

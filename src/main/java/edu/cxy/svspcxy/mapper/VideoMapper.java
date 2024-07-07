@@ -28,4 +28,6 @@ public interface VideoMapper {
     boolean addPlayNums(Integer id);
 
     List<Video> findAll();
+
+    boolean lock(Integer id);
 }
