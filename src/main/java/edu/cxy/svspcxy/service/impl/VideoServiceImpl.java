@@ -83,4 +83,10 @@ public class VideoServiceImpl implements VideoService {
     public Video findById(Integer id) {
         return videoMapper.findById(id);
     }
+
+    @Transactional
+    @Override
+    public boolean addPlayNums(Integer id) {
+        return videoMapper.addPlayNums(id);
+    }
 }

@@ -5,6 +5,7 @@ import edu.cxy.svspcxy.request.ResPage;
 import edu.cxy.svspcxy.request.ResponseResult;
 import edu.cxy.svspcxy.service.VideoService;
 import edu.cxy.svspcxy.util.JWTUtil;
+import edu.cxy.svspcxy.util.KeyUtil;
 import edu.cxy.svspcxy.util.OssUtil;
 import edu.cxy.svspcxy.vo.VideoAddVo;
 import lombok.extern.slf4j.Slf4j;
@@ -84,5 +85,14 @@ public class VideoController {
         Video video  = videoService.findById(id);
 
         return new ResponseResult(HttpStatus.OK.value(),"success",video);
+    }
+
+    @GetMapping("/addPlayNums/{id}/{key}")
+    public ResponseResult addPlayNums(@PathVariable("id")Integer id,@PathVariable("key") String key){
+        if (KeyUtil.removeKey(key)){
+            // 删除成功，key存在
+            return new ResponseResult(HttpStatus.OK.value(), "success", videoService.addPlayNums(id));
+        }
+        return new ResponseResult<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),"fail",false);
     }
 }

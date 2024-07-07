@@ -43,4 +43,8 @@
     <select id="findById" resultType="edu.cxy.svspcxy.entity.Video">
         select * from t_video where id = #{id} and state = 'video_pass'
     </select>
+
+    <update id="addPlayNums">
+        update t_video set playnums = playnums + 1 where id = #{id}
+    </update>
 </mapper>
