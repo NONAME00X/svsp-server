@@ -47,4 +47,8 @@
     <update id="addPlayNums">
         update t_video set playnums = playnums + 1 where id = #{id}
     </update>
+
+    <select id="findAll" resultType="edu.cxy.svspcxy.entity.Video">
+        select * from t_video order by id desc
+    </select>
 </mapper>

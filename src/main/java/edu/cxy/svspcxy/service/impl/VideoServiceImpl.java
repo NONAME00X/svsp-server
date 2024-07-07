@@ -89,4 +89,23 @@ public class VideoServiceImpl implements VideoService {
     public boolean addPlayNums(Integer id) {
         return videoMapper.addPlayNums(id);
     }
+
+    @Override
+    public ResPage<List<Video>> findAll(Integer page, Integer size) {
+        PageHelper.startPage(page, size);
+        //
+        List<Video> videoList = videoMapper.findAll();
+        // 获取分页信息
+        PageInfo<Video> pageInfo = new PageInfo<>(videoList);
+        // 封装分页信息返回给前端
+        ResPage<List<Video>> resPage = new ResPage<>();
+        resPage.setPage(page);  // 当前页
+        resPage.setSize(size);  // 页大小
+        resPage.setTotalPage(pageInfo.getPages());  // 总页数
+        resPage.setTotal(pageInfo.getTotal());      // 总条数
+        resPage.setData(videoList);
+
+        //
+        return resPage;
+    }
 }

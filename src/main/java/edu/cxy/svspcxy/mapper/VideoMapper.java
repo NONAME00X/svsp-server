@@ -26,4 +26,6 @@ public interface VideoMapper {
     Video findById(Integer id);
 
     boolean addPlayNums(Integer id);
+
+    List<Video> findAll();
 }

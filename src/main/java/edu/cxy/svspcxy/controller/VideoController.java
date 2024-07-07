@@ -95,4 +95,10 @@ public class VideoController {
         }
         return new ResponseResult<>(HttpStatus.INTERNAL_SERVER_ERROR.value(),"fail",false);
     }
+
+    @GetMapping("/findAll/{page}/{size}")
+    public ResponseResult findAll(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
+        ResPage<List<Video>> resPage = videoService.findAll(page, size);
+        return new ResponseResult(HttpStatus.OK.value(), "success", resPage);
+    }
 }

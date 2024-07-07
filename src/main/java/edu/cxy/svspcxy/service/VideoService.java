@@ -21,4 +21,6 @@ public interface VideoService {
     Video findById(Integer id);
 
     boolean addPlayNums(Integer id);
+
+    ResPage<List<Video>> findAll(Integer page, Integer size);
 }
