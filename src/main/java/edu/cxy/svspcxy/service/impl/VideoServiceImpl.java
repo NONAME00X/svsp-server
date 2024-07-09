@@ -6,11 +6,13 @@ import edu.cxy.svspcxy.entity.Video;
 import edu.cxy.svspcxy.mapper.VideoMapper;
 import edu.cxy.svspcxy.request.ResPage;
 import edu.cxy.svspcxy.service.VideoService;
+import edu.cxy.svspcxy.util.WebSocketUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.websocket.Session;
 import java.util.List;
 
 /**
@@ -114,6 +116,16 @@ public class VideoServiceImpl implements VideoService {
     public boolean lock(Integer id) {
         videoMapper.lock(id);
         // 通知up主视频被锁定：websocket
+        // 获取到用户的账号、视频的标题  消息就是字符串，想拼接啥都行
+        // 用户账号
+        String account = videoMapper.findAccountByVid(id);
+        // 视频标题
+        String title = videoMapper.findTitleById(id);
+        // 拼接消息
+        String message = account + "您的视频：《" + title + "》被管理员锁定";
+        // 发消息
+        Session session = WebSocketUtil.MESSAGEMAP.get(account);
+        WebSocketUtil.sendMessage(session, message);
 
         return true;
     }

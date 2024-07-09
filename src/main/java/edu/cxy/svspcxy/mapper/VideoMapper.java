@@ -30,4 +30,8 @@ public interface VideoMapper {
     List<Video> findAll();
 
     boolean lock(Integer id);
+
+    String findAccountByVid(Integer id);
+
+    String findTitleById(Integer id);
 }

@@ -55,4 +55,12 @@
     <update id="lock">
         update t_video set state = 'video_lock' where id = #{id}
     </update>
+
+    <select id="findAccountByVid" resultType="string">
+        SELECT u.account FROM t_user u,t_video v WHERE u.id = v.uid AND v.id = #{id}
+    </select>
+
+    <select id="findTitleById" resultType="string">
+        select title from t_video where id = #{id}
+    </select>
 </mapper>
