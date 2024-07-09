@@ -112,6 +112,9 @@ public class VideoServiceImpl implements VideoService {
     @Transactional
     @Override
     public boolean lock(Integer id) {
-        return videoMapper.lock(id);
+        videoMapper.lock(id);
+        // 通知up主视频被锁定：websocket
+
+        return true;
     }
 }
