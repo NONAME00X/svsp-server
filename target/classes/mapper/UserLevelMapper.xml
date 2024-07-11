@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.cxy.svspcxy.mapper.UserLevelMapper">
+    <select id="findByUid" resultType="edu.cxy.svspcxy.entity.UserLevel">
+        SELECT ul.id,ul.level,ul.duration,ul.mode,ul.color
+        FROM t_user u,t_user_danmu ul WHERE u.level = ul.level AND u.id = #{uid}
+    </select>
+</mapper>

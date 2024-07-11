@@ -29,4 +29,15 @@ public class ReviewServiceImpl implements ReviewService {
     public List<Review> findByVid(Integer vid) {
         return reviewMapper.findByVid(vid);
     }
+
+    @Override
+    public List<Review> getAll() {
+        List<Review> reviewList = reviewMapper.getAll();
+        return reviewList;
+    }
+
+    @Override
+    public void commitState(Integer id, String reviewState) {
+        reviewMapper.commitState(id,reviewState);
+    }
 }

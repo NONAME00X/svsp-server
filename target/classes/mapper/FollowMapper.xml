@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.cxy.svspcxy.mapper.FollowMapper">
+
+    <select id="findByUid" resultType="edu.cxy.svspcxy.entity.Follow">
+        SELECT u.account,u.avatar,f.id,f.uid,f.fid,f.time
+        FROM t_follow f,t_user u
+        WHERE u.id = f.fid AND f.uid = #{uid}
+    </select>
+
+    <insert id="addFollow">
+        insert into t_follow values(null, #{uid}, #{fid},now())
+    </insert>
+
+    <select id="isFollow" resultType="Integer">
+        SELECT COUNT(*)
+        FROM t_follow
+        WHERE uid = #{uid} AND fid = #{fid}
+    </select>
+
+    <delete id="deleteFollow">
+        delete from t_follow where  id = #{id}
+    </delete>
+</mapper>

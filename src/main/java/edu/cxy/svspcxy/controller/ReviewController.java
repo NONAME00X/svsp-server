@@ -1,5 +1,6 @@
 package edu.cxy.svspcxy.controller;
 
+import edu.cxy.svspcxy.entity.Report;
 import edu.cxy.svspcxy.entity.Review;
 import edu.cxy.svspcxy.request.ResponseResult;
 import edu.cxy.svspcxy.service.ReviewService;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.QueryParam;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
@@ -49,5 +51,18 @@ public class ReviewController {
     public ResponseResult findByVid(@PathVariable("vid") Integer vid){
         List<Review> reviewList = reviewService.findByVid(vid);
         return new ResponseResult(HttpStatus.OK.value(), "success", reviewList);
+    }
+
+    @GetMapping("/getAll")
+    public ResponseResult getAll(){
+        List<Review> reviewList = reviewService.getAll();
+        return new ResponseResult(HttpStatus.OK.value(), "success", reviewList);
+    }
+
+    @GetMapping("/commit/{id}")
+    /*审核状态*/
+    public ResponseResult commitState(@PathVariable("id")Integer id, @QueryParam("reportState")String reviewState){
+        reviewService.commitState(id,reviewState);
+        return new ResponseResult(HttpStatus.OK.value(), "success", null);
     }
 }

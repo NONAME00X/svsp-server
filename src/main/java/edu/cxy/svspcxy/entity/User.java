@@ -13,7 +13,9 @@ public class User {
     private String password;
     private String avatar;
     private String state;
+    private String level;
 
     // 角色
     private String role;
+
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.cxy.svspcxy.mapper.ReportMapper">
+    <select id="getAll" resultType="edu.cxy.svspcxy.entity.Report">
+        SELECT r.id,r.uid,r.vid,r.reason,r.state,r.time,v.title,u.account
+        FROM t_report r,t_user u,t_video v
+        WHERE u.id = v.uid AND v.id = r.vid AND r.state='report_commit'
+    </select>
+
+    <update id="commitState">
+        update t_report set state = #{state} where id = #{id}
+    </update>
+</mapper>

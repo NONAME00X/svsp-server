@@ -8,14 +8,18 @@ import edu.cxy.svspcxy.util.JWTUtil;
 import edu.cxy.svspcxy.util.KeyUtil;
 import edu.cxy.svspcxy.util.OssUtil;
 import edu.cxy.svspcxy.vo.VideoAddVo;
+import edu.cxy.svspcxy.vo.VideoTitleVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Mr·Xiang
@@ -34,16 +38,18 @@ public class VideoController {
     @GetMapping("/findByUid/{aaa}/{bbb}")
     public ResponseResult findByUid(
             @PathVariable("aaa") Integer page,
-            @PathVariable("bbb") Integer size, HttpServletRequest request){
+            @PathVariable("bbb") Integer size, @QueryParam("search") String search, HttpServletRequest request){
 
         // debug：最低级别日志信息，默认情况是不会记录、打印
         // info：记录关键信息的级别，级别高于debug，默认会打印出来
         log.debug("page = {}", page);
         log.debug("size = {}", size);
+        log.debug("search = {}", search);
         log.debug(request.getHeader("Authorization"));
         int uid = JWTUtil.getuid(request.getHeader(("Authorization")));
+
         // 查询数据
-        ResPage<List<Video>> resPage = videoService.findByUid(uid, page, size);
+        ResPage<List<Video>> resPage = videoService.findByUid(uid, page, size,search);
         // 返回结果
         return new ResponseResult(HttpStatus.OK.value(),"success", resPage);
     }
@@ -97,8 +103,8 @@ public class VideoController {
     }
 
     @GetMapping("/findAll/{page}/{size}")
-    public ResponseResult findAll(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
-        ResPage<List<Video>> resPage = videoService.findAll(page, size);
+    public ResponseResult findAll(@PathVariable("page") Integer page, @PathVariable("size") Integer size,@QueryParam("search")String search,@QueryParam("state")String state){
+        ResPage<List<Video>> resPage = videoService.findAll(page, size,search,state);
         return new ResponseResult(HttpStatus.OK.value(), "success", resPage);
     }
 
@@ -106,5 +112,33 @@ public class VideoController {
     public ResponseResult lock(@PathVariable("id") Integer id){
 
         return new ResponseResult(HttpStatus.OK.value(), "success", videoService.lock(id));
+    }
+
+    @GetMapping("/editVideo/{id}")
+    public ResponseResult editVideo(@PathVariable("id")Integer id,@QueryParam("title")String title){
+       videoService.editVideo(id,title);
+        return new ResponseResult(HttpStatus.OK.value(), "success", null);
+    }
+
+    @GetMapping("/delete/{id}")
+    public ResponseResult deleteVideo(@PathVariable("id")Integer id){
+        videoService.deleteVideo(id);
+        return new ResponseResult(HttpStatus.OK.value(), "success", null);
+    }
+
+    @GetMapping("/findAllTitle")
+    public ResponseResult findAllTitle(HttpServletRequest request){
+        log.debug(request.getHeader("Authorization"));
+        int uid = JWTUtil.getuid(request.getHeader(("Authorization")));
+        List<VideoTitleVo> titles = videoService.findAllTitle(uid);
+        return new ResponseResult(HttpStatus.OK.value(), "success", titles);
+    }
+
+
+    @GetMapping("/commit/{id}")
+    /*审核状态*/
+    public ResponseResult commitState(@PathVariable("id")Integer id,@QueryParam("videoPass")Boolean videoPass){
+        videoService.commitState(id,videoPass);
+        return new ResponseResult(HttpStatus.OK.value(), "success", null);
     }
 }

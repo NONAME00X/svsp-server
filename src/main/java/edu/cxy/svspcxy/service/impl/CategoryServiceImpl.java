@@ -22,4 +22,24 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> all() {
         return categoryMapper.all();
     }
+
+    @Override
+    public void commitState(Integer id, String categoryState) {
+        categoryMapper.commitState(id,categoryState);
+    }
+
+    @Override
+    public List<Category> allState() {
+        return categoryMapper.allState();
+    }
+
+    @Override
+    public void add(String name) {
+        categoryMapper.add(name);
+    }
+
+    @Override
+    public void edit(Integer id, String name) {
+        categoryMapper.edit(id,name);
+    }
 }

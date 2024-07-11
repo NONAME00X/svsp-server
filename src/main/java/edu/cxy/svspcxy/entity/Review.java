@@ -14,8 +14,12 @@ public class Review {
     private Integer uid;
     private String content;
     private String time;
+    private String state;
 
     // 评论者的信息
     private String account;
     private String avatar;
+
+    //视频的标题
+    private String title;
 }

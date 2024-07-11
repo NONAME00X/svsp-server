@@ -20,4 +20,8 @@ public class Video {
     private String taskid;  // 任务id
 
     private Integer[] cids; // 分类id
+    //点赞数和收藏数
+    private Integer likenums;
+    private Integer collectnums;
+
 }

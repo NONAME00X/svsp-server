@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.cxy.svspcxy.mapper.CollectMapper">
+
+    <select id="findByUidAndSearch" resultType="edu.cxy.svspcxy.entity.Collect">
+        SELECT v.title,u.avatar,c.id,c.vid,c.uid,c.time
+        FROM t_collect c,t_video v,t_user u
+        WHERE u.id = v.uid AND v.id = c.vid AND c.uid=#{uid} AND v.title like concat('%',#{search},'%')
+    </select>
+
+    <delete id="deleteCollect">
+        delete from t_collect where  id = #{id}
+    </delete>
+</mapper>

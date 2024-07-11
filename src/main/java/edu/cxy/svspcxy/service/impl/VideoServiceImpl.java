@@ -7,6 +7,7 @@ import edu.cxy.svspcxy.mapper.VideoMapper;
 import edu.cxy.svspcxy.request.ResPage;
 import edu.cxy.svspcxy.service.VideoService;
 import edu.cxy.svspcxy.util.WebSocketUtil;
+import edu.cxy.svspcxy.vo.VideoTitleVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,11 +27,16 @@ public class VideoServiceImpl implements VideoService {
     private VideoMapper videoMapper;
 
     @Override
-    public ResPage<List<Video>> findByUid(Integer uid, Integer page, Integer size) {
+    public ResPage<List<Video>> findByUid(Integer uid, Integer page, Integer size,String search) {
         // 设置分页信息
         PageHelper.startPage(page, size);
         // 执行sql
-        List<Video> videoList = videoMapper.findByUid(uid);
+        List<Video> videoList = videoMapper.findByUid(uid,search);
+        //给每个video插入likenums和collectnums
+        for (Video video:videoList) {
+            video.setLikenums(videoMapper.getLikeNumsById(video.getId()));
+            video.setCollectnums(videoMapper.getCollectNumsById(video.getId()));
+        }
         // 获取分页信息
         PageInfo<Video> pageInfo = new PageInfo<>(videoList);
         //
@@ -93,10 +99,10 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public ResPage<List<Video>> findAll(Integer page, Integer size) {
+    public ResPage<List<Video>> findAll(Integer page, Integer size,String search,String state) {
         PageHelper.startPage(page, size);
         //
-        List<Video> videoList = videoMapper.findAll();
+        List<Video> videoList = videoMapper.findAll(search,state);
         // 获取分页信息
         PageInfo<Video> pageInfo = new PageInfo<>(videoList);
         // 封装分页信息返回给前端
@@ -129,4 +135,34 @@ public class VideoServiceImpl implements VideoService {
 
         return true;
     }
+
+    @Transactional
+    @Override
+    public void editVideo(Integer id, String title) {
+        videoMapper.editVideo(id,title);
+    }
+
+    @Transactional
+    @Override
+    public void deleteVideo(Integer id) {
+        videoMapper.deleteVideo(id);
+    }
+
+    @Override
+    public List<VideoTitleVo> findAllTitle(int uid) {
+        List<VideoTitleVo> titles= videoMapper.findAllTitle(uid);
+        return titles;
+    }
+
+    @Transactional
+    @Override
+    public void commitState(Integer id, Boolean videoPass) {
+        String videoState="";
+        if(videoPass)
+            videoState="video_pass";
+        else
+            videoState="video_reject";
+        videoMapper.commitState(id,videoState);
+    }
+
 }
